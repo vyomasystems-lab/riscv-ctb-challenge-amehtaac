@@ -18,9 +18,14 @@ loop:
   lw t2, 4(t0)
   lw t3, 8(t0)
   add t4, t1, t2
-  addi t0, t0, 12
-  beq t3, t4, loop        # check if sum is correct
+  beq t3, t4, next_test_case        # check if sum is correct
   j fail
+
+next_test_case:
+  addi t5, t5, -1    # Decrement test case
+  addi t0, t0, 12    
+  bnez t5, loop      # If t5 is not zero, repeat the loop
+  j test_end         # If t5 is zero, all test cases are processed, jump to test_end
 
 test_end:
 
